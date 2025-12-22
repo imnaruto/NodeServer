@@ -1,0 +1,20 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "This is Basic Webserver",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imnaruto/NodeServer.git"
+  },
+  "author": "Sumeet_Upadhyay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imnaruto/NodeServer/issues"
+  },
+  "homepage": "https://github.com/imnaruto/NodeServer#readme",
+  "keywords": []
+}
