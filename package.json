@@ -16,5 +16,11 @@
     "url": "https://github.com/imnaruto/NodeServer/issues"
   },
   "homepage": "https://github.com/imnaruto/NodeServer#readme",
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mysql": "^2.18.1"
+  }
 }
