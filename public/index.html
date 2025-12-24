@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+  <h2>User Form</h2>
+
+  <form method="POST" action="/submit">
+    <p> To register as partner kindly provide below details.</p>
+    Name: <input type="text" name="name" required placeholder="Enter your Name"><br><br>
+
+    Phone: <input type="tel" name="phone" required placeholder="Enter your phone with country code"><br><br>
+
+    Email: <input type="email" name="email" required autocomplete="off" placeholder="Enter your legit email address"><br><br>
+
+    Date of Birth: <input type="date" name="dob" required><br><br>
+
+    Country:
+    <select name="country">
+      <option>India</option>
+      <option>USA</option>
+      <option>UK</option>
+    </select><br><br>
+
+    State:
+    <select name="state">
+      <option>Maharashtra</option>
+      <option>Karnataka</option>
+      <option>Delhi</option>
+    </select><br><br>
+
+    Gender:
+    <select name="gender">
+      <option>Male</option>
+      <option>Female</option>
+      <option>Others</option>
+    </select><br><br>
+
+    Account ID: <input type="text" name="account_id" required placeholder="Enter your 12 digit account ID"><br><br>
+    <p>Intersted in news letter:<br>
+    <input type="radio" id="Yes" name="Intersted" value="Yes" checked>
+    <label for="Intersted">Intersted</label><br>
+
+    <input type="radio" id="No" name="Intersted" value="No">
+    <label for="Intersted">Not Intersted</label><br>
+
+    <br>
+    </p>
+
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
