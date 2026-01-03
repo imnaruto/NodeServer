@@ -29,22 +29,22 @@ db.connect(err => {
 //Handle Form Submission
 app.post('/submit', (req, res)=>{
     const{
-        name, phone, email, dob, country, state, gender, account_id
+        name, phone, email, dob
     } = req.body;
 
 //Redact Account ID (Show only last 4 digits
-const redactedAccountId = account_id
-    ? account_id.slice(-4).padStart(account_id.length, '*')
-    : null;
+//const redactedAccountId = account_id
+ //   ? account_id.slice(-4).padStart(account_id.length, '*')
+ //   : null;
 
 const sql = `
 INSERT INTO users
-(name, phone, email, dob, country, state, gender, account_id)
-VALUES(?, ?, ?, ?, ?, ?, ?, ?)
+(name, phone, email, dob)
+VALUES(?, ?, ?, ?)
 `;
 
 db.query(sql, [
-    name, phone, email, dob, country, state, gender, redactedAccountId
+    name, phone, email, dob
 ],(err) => {
     if (err) throw err;
     res.send("Form submitted successfully!");
