@@ -1,57 +1,49 @@
 //import frameworks and libraries
-const express = require('express'); 
-//const bodyParser = require('body-parser');
-const mysql = require('mysql2');
+const express = require('express');
 const path = require('path');
+const initDb = require('./db');
 
-//create nodejs app using express and middlewares
-const app =express();
-//app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.urlencoded({extended: true}));
+const app = express();
+let db;
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Initialize DB BEFORE starting server
+(async () => {
+  try {
+    db = await initDb();
 
-//create connection to RDS
-const db = mysql.createConnection ({
-host: 'database-1.cysorqkniyib.us-east-1.rds.amazonaws.com',
-user: 'admin',
-password: 'Qwerty123#',
-database:'formdb'
-});
+    app.listen(8080, () => {
+      console.log("Server running on port 8080");
+    });
+  } catch (err) {
+    console.error("Failed to start app:", err);
+    process.exit(1);
+  }
+})();
 
-//Connect to RDS
-db.connect(err => {
-    if (err) throw err;
-    console.log("Connected to MYSQL RDS")
-});
+// Handle Form Submission
+app.post('/submit', async (req, res) => {
+  try {
+    const { name, phone, email, dob } = req.body;
 
-//Handle Form Submission
-app.post('/submit', (req, res)=>{
-    const{
-        name, phone, email, dob
-    } = req.body;
+    if (!name || !phone || !email || !dob) {
+      return res.status(400).send("All fields are required");
+    }
 
-//Redact Account ID (Show only last 4 digits
-//const redactedAccountId = account_id
- //   ? account_id.slice(-4).padStart(account_id.length, '*')
- //   : null;
+    const sql = `
+      INSERT INTO users (name, phone, email, dob)
+      VALUES (?, ?, ?, ?)
+    `;
 
-const sql = `
-INSERT INTO users
-(name, phone, email, dob)
-VALUES(?, ?, ?, ?)
-`;
+    await db.execute(sql, [name, phone, email, dob]);
 
-db.query(sql, [
-    name, phone, email, dob
-],(err) => {
-    if (err) throw err;
-    res.send("Form submitted successfully!");
-});
-});
-
-//Run Node JS server on port 8080
-app.listen(8080, () => {
-    console.log("Server running on port 8080")
+    res.send("Form Submitted Successfully!");
+  } catch (err) {
+    console.error("Insert Failed:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
