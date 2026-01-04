@@ -12,7 +12,7 @@ async function initDb() {
         host: secret.host,
         user: secret.username,
         password: secret.password,
-        database: secret.dbname,
+        database: formdb,
         port: secret.port,
         waitForConnections: true,
         connectionLimit: 10
