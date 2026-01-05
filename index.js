@@ -11,6 +11,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/api', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+//app.get('/api/:path(*)', (req, res)=>{
+ // res.sendFile(path.join(__dirname, 'public', indexedDB.html));
+//});
+
 // Initialize DB BEFORE starting server
 (async () => {
   try {
