@@ -3,4 +3,5 @@ node_modules
 .gitignore
 README.md 
 
+
 # node_modules gets rebuilt inside the container by npm install, so copying it is waste of time and space. .git is not need in image. 
